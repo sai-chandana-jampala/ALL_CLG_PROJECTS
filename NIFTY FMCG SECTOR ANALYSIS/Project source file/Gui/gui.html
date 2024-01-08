@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMCG Index Analysis</title>
+    <style>
+        body {
+            background-color: #f5f5f5; /* Light gray background */
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Dark text color */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            background-color: #333; /* Dark background color for heading */
+            color: #fff; /* White text color */
+            padding: 15px;
+            margin: 0;
+            text-align: center;
+        }
+
+        div {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #subOptions {
+            display: none;
+        }
+
+        #visualizationContainer {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff; /* White background for visualization container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        iframe {
+            border: none;
+        }
+
+        /* Style for the analysis description */
+        #visualizationContainer h2, #visualizationContainer h3, #visualizationContainer h4, #visualizationContainer h5, #visualizationContainer p, #visualizationContainer ul {
+            margin-bottom: 10px;
+        }
+
+        #visualizationContainer h2 {
+            color: #333;
+        }
+
+        #visualizationContainer h3 {
+            color: #555;
+        }
+
+        #visualizationContainer h4, #visualizationContainer h5 {
+            color: #777;
+        }
+
+        #visualizationContainer p {
+            color: #444;
+        }
+
+        #visualizationContainer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #visualizationContainer li {
+            margin-bottom: 5px;
+        }
+
+        #visualizationContainer span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Main Menu</h1>
+
+<div>
+    <label>Select an option:</label>
+    <select id="mainMenu">
+        <option value="">-- Select --</option>
+        <option value="analysis">Analysis</option>
+        <option value="database">Database</option>
+    </select>
+</div>
+
+<div id="subOptions">
+    <label>Select a sub-option:</label>
+    <select id="subMenu"></select>
+</div>
+
+<div id="visualizationContainer"></div>
+
+<script>
+    const mainMenu = document.getElementById('mainMenu');
+    const subMenu = document.getElementById('subMenu');
+    const visualizationContainer = document.getElementById('visualizationContainer');
+
+    // Define options for analysis
+    const analysisOptions = [
+    { 
+        name: 'Percentage Change', 
+        file: 'PercentChange.html', 
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis aims to calculate the daily percentage change in closing prices 
+                of Nifty FMCG index.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Percentage Change = ( Close - Prev. day Close / Prev. day Close ) * 100
+            </p>
+            <h3>Inferences: </h3>
+                <h4>Interpretation of PercentChange:</h4>
+                    <p>A positive percentage change indicates an increase in closing prices from the previous day.</p>
+                    <p>A negative percentage change indicates a decrease in closing prices from the previous day.</p> 
+                <h5>Volatility Assessment:</h5>
+                <p>Higher absolute values of percentage change suggest greater volatility in the financial instrument.</p> 
+                <p>Lower absolute values suggest relatively stable price movements.</p>         
+        `
+    },
+    { 
+        name: 'Relative Strength Index (RSI)', 
+        file: 'RSI.html', 
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis calculates the Relative Strength Index (RSI) for Nifty FMCG index 
+                for more than the past 10 years. RSI is a momentum oscillator that measures the speed and 
+                change of price movements.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                RSI = 100 - (100 / (1 + RS))
+            </p>
+            <h3>Inferences:</h3>
+            <h4>Interpretation of RSI:</h4>
+            <p>
+                RSI values above 70 suggest overbought conditions (potential selling opportunity).
+            </p>
+            <p>
+                RSI values below 30 suggest oversold conditions (potential buying opportunity).
+            </p>
+            <h5>Momentum and Trend:</h5>
+            <p>
+                RSI is used to identify the strength and direction of a trend. Values above 50 may 
+                indicate an uptrend, while values below 50 may indicate a downtrend.
+            </p>
+        `
+    },
+    { 
+        name: 'Market Sentiment Analysis', 
+        file: 'Sentiment.html', 
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis determines the market sentiment (positive or negative) based on 
+                the daily closing prices of a financial instrument.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Sentiment = Positive if Close > Previous Day Close, else Negative
+            </p>
+            <h3>Inferences:</h3>
+            <h4>Interpretation of Sentiment:</h4>
+            <p>
+                The sentiment is classified as "Positive" if the closing price is higher than the 
+                previous day's close, and "Negative" otherwise.
+            </p>
+            <h5>Color Mapping:</h5>
+            <p>
+                The sentiment categories are visually represented with the following colors:
+            </p>
+            <ul>
+                <li>Positive: <span style="color: darkgreen;">Dark Green</span></li>
+                <li>Negative: <span style="color: darkred;">Dark Red</span></li>
+            </ul>
+        `
+    },
+    { 
+        name: 'Rolling Standard Deviation of Closing Price',
+        file: 'RollingStdDev.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis calculates the rolling standard deviation of the closing prices 
+                of a financial instrument to assess the volatility over time.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Rolling Standard Deviation = Standard Deviation(Close, window)
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                A higher rolling standard deviation suggests higher price volatility, while a 
+                lower value indicates relatively stable price movements.
+            </p>
+        `
+    },
+    { 
+        name: 'Price and Volume Correlation',
+        file: 'priceVolcoreelation.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis examines the correlation between daily closing prices and trading 
+                volumes of a financial instrument.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Correlation = Correlation(Close, Volume)
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                Positive correlation suggests a relationship between price movements and trading volumes,
+                while negative correlation indicates an inverse relationship.
+            </p>
+        `
+    },
+    { 
+        name: 'Cumulative Returns',
+        file: 'cummulative_Returns.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis calculates the cumulative returns of a financial instrument over time.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Cumulative Returns = (Close / Initial Close) - 1
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                Positive cumulative returns indicate profit, while negative values indicate losses.
+            </p>
+        `
+    },
+    { 
+        name: 'Price Gap Analysis',
+        file: 'priceGap.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis evaluates price gaps between consecutive days to identify potential 
+                market trends or reversals.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Price Gap = Close - Previous Day Close
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                Positive price gaps may indicate upward momentum, while negative gaps may suggest
+                downward momentum or potential reversals.
+            </p>
+        `
+    },
+    { 
+        name: 'Moving Average Analysis',
+        file: 'MovngAvg.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis applies moving averages to smooth out price trends and identify potential
+                entry or exit points in the market.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Moving Average = Average(Close, window)
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                Crossovers between short-term and long-term moving averages may signal trend reversals.
+            </p>
+        `
+    },
+    { 
+        name: 'High-Low Range Analysis',
+        file: 'High_Low_range.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis examines the high-low range of daily prices to assess the volatility 
+                and potential trading opportunities.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                High-Low Range = High - Low
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                A higher high-low range suggests higher volatility, while a lower range indicates 
+                relatively stable price movements.
+            </p>
+        `
+    },
+    { 
+            name: 'Percentage Change in Sales',
+            file: 'percentage_change_sales.html',
+            description: `
+                <h2>Analysis Purpose:</h2>
+                <p>
+                    The analysis calculates the percentage change in sales over a given period.
+                </p>
+                <h2>Formula:</h2>
+                <p>
+                    Percentage Change in Sales = ((Sales - Previous Sales) / Previous Sales) * 100
+                </p>
+                <h3>Inferences:</h3>
+                <p>
+                    A positive percentage change indicates an increase in sales, while a negative percentage change indicates a decrease.
+                </p>
+                <p>
+                    Higher absolute values suggest significant changes in sales.
+                </p>
+            `
+        }, 
+   
+    { 
+        name: 'Trading Volume Trends',
+        file: 'Volumetrends.html',
+        description: `
+            <h2>Analysis Purpose:</h2>
+            <p>
+                The analysis explores trends in trading volumes over time to identify potential 
+                changes in market interest or participation.
+            </p>
+            <h2>Formula:</h2>
+            <p>
+                Trading Volume Trends = Trend analysis on Volume
+            </p>
+            <h3>Inferences:</h3>
+            <p>
+                Increasing trading volumes may indicate growing interest in the market, while decreasing
+                volumes may suggest declining interest or a potential reversal.
+            </p>
+        `
+    },
+    // Add more options as needed
+];
+
+// Populate sub-options when "Database" is selected
+mainMenu.addEventListener('change', function () {
+        if (mainMenu.value === 'database') {
+            subOptions.style.display = 'block';
+            fetchCsvTables();
+        } else {
+            subOptions.style.display = 'none';
+            visualizationContainer.innerHTML = '';
+        }
+    });
+
+    // Display selected CSV file when a sub-option is chosen
+    subMenu.addEventListener('change', function () {
+        const selectedCsvFile = subMenu.value;
+        if (selectedCsvFile) {
+            loadCsvVisualization(selectedCsvFile);
+        }
+    });
+
+    // Function to fetch available CSV files and populate sub-menu
+    function fetchCsvTables() {
+        // You need to replace 'your_csv_directory' with the actual directory path containing CSV files
+        fetch('C:\\Users\\jaide\\OneDrive\\Desktop\\Gui\\fmcg_data.csv')
+            .then(response => response.json())
+            .then(data => {
+                populateSubOptions(data);
+            })
+            .catch(error => {
+                console.error('Error fetching CSV files:', error);
+            });
+    }
+
+    // Function to populate sub-options dropdown
+    function populateSubOptions(options) {
+        subMenu.innerHTML = '<option value="">-- Select --</option>';
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            subMenu.appendChild(optionElement);
+        });
+    }
+
+    // Function to load and display data from the selected CSV file
+    function loadCsvVisualization(fmcg_data) {
+        visualizationContainer.innerHTML = `<h2>${fmcg_data}</h2>`;
+        // You can further customize this function to read and display data from the selected CSV file
+    }
+
+
+    // Populate sub-options when "Analysis" is selected
+    mainMenu.addEventListener('change', function () {
+        if (mainMenu.value === 'analysis') {
+            subOptions.style.display = 'block';
+            populateSubOptions(analysisOptions);
+        } else {
+            subOptions.style.display = 'none';
+            visualizationContainer.innerHTML = '';
+        }
+    });
+
+    // Display selected visualization when a sub-option is chosen
+    subMenu.addEventListener('change', function () {
+        const selectedOption = subMenu.value;
+        if (selectedOption) {
+            const selectedAnalysis = analysisOptions.find(option => option.name === selectedOption);
+            if (selectedAnalysis) {
+                loadVisualization(selectedAnalysis.file, selectedAnalysis.description);
+            }
+        }
+    });
+
+    // Function to populate sub-options dropdown
+    function populateSubOptions(options) {
+        subMenu.innerHTML = '<option value="">-- Select --</option>';
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.name;
+            optionElement.textContent = option.name;
+            subMenu.appendChild(optionElement);
+        });
+    }
+
+    // Function to load and display the selected visualization
+    function loadVisualization(file, description) {
+        visualizationContainer.innerHTML = '';
+        
+        // Add introductory text or header
+        const introText = document.createElement('div');
+        introText.innerHTML = description; // Use innerHTML to render HTML tags
+        visualizationContainer.appendChild(introText);
+
+        // Create iframe for the HTML file
+        const iframe = document.createElement('iframe');
+        iframe.src = file;
+        iframe.style.width = '100%';
+        iframe.style.height = '500px';
+        visualizationContainer.appendChild(iframe);
+    }
+
+</script>
+
+</body>
+</html>
