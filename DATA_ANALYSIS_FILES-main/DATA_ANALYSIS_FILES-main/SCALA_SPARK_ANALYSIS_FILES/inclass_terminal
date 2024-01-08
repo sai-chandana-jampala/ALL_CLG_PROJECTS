@@ -1,0 +1,372 @@
+charishma@osboxes:~$ scala
+Welcome to Scala 2.11.12 (OpenJDK 64-Bit Server VM, Java 11.0.18).
+Type in expressions for evaluation. Or try :help.
+
+scala> 
+
+scala> var a =Array(1,1.5f)
+a: Array[Float] = Array(1.0, 1.5)
+
+scala> var a =Array(1,"asdsa")
+a: Array[Any] = Array(1, asdsa)
+
+scala> var a =Array.tabulate(5)(_+0)
+a: Array[Int] = Array(0, 1, 2, 3, 4)
+
+scala> var a =Array.tabulate(5)(_*2)
+a: Array[Int] = Array(0, 2, 4, 6, 8)
+
+scala> var a =Array.tabulate(5)(_+2)
+a: Array[Int] = Array(2, 3, 4, 5, 6)
+
+scala> var a =Array.tabulate(5)(_-1)
+a: Array[Int] = Array(-1, 0, 1, 2, 3)
+
+scala> var a =Array.tabulate(3,3)(_+1)
+<console>:11: error: missing parameter type for expanded function ((x$1) => x$1.$plus(1))
+       var a =Array.tabulate(3,3)(_+1)
+                                  ^
+
+scala> var a =Array.tabulate(3,3)((x,y) =>(x,y))
+a: Array[Array[(Int, Int)]] = Array(Array((0,0), (0,1), (0,2)), Array((1,0), (1,1), (1,2)), Array((2,0), (2,1), (2,2)))
+
+scala> var a =Array.tabulate(3,3)((x,y) =>(x*2,y*3))
+a: Array[Array[(Int, Int)]] = Array(Array((0,0), (0,3), (0,6)), Array((2,0), (2,3), (2,6)), Array((4,0), (4,3), (4,6)))
+
+scala> var a =(1,6)
+a: (Int, Int) = (1,6)
+
+scala> var b =(4,2)
+b: (Int, Int) = (4,2)
+
+scala> var c =(9,4)
+c: (Int, Int) = (9,4)
+
+scala> var a =Array(1,6)
+a: Array[Int] = Array(1, 6)
+
+scala> var c =Array(9,4)
+c: Array[Int] = Array(9, 4)
+
+scala> var d =Array.concat(a,c)
+d: Array[Int] = Array(1, 6, 9, 4)
+
+scala> var c =(1,"string")
+c: (Int, String) = (1,string)
+
+scala> a :+8
+res0: Array[Int] = Array(1, 6, 8)
+
+scala> 8+: a
+res1: Array[Int] = Array(8, 1, 6)
+
+scala> val a = Array(3,4)
+a: Array[Int] = Array(3, 4)
+
+scala> val a =(3,4)
+a: (Int, Int) = (3,4)
+
+scala> var a =(3,4)
+a: (Int, Int) = (3,4)
+
+scala> a=a:+4
+<console>:12: error: value :+ is not a member of (Int, Int)
+       a=a:+4
+          ^
+
+scala> a = a :+4
+<console>:12: error: value :+ is not a member of (Int, Int)
+       a = a :+4
+             ^
+
+scala> a
+res2: (Int, Int) = (3,4)
+
+scala> val d = Array(6,1)
+d: Array[Int] = Array(6, 1)
+
+scala> b(0) = 7
+<console>:13: error: value update is not a member of (Int, Int)
+       b(0) = 7
+       ^
+
+scala> d(0) =7
+
+scala> d
+res5: Array[Int] = Array(7, 1)
+
+scala> 1 to 10
+res6: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> (1 to 10).toArray
+res7: Array[Int] = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ArrayBuffer
+
+scala> import scala.collection.mutable._
+import scala.collection.mutable._
+
+scala> var ab = new ArrayBuffer[String]()
+ab: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer()
+
+scala> ab = ArrayBuffer("sdae","jhkio")
+ab: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio)
+
+scala> ab += "kikj"
+res8: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj)
+
+scala> ab += "kikj"
+res9: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj, kikj)
+
+scala> ab += "kikj"
+res10: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj, kikj, kikj)
+
+scala> ab ++=Array( "kikj","jhiy")
+res11: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj, kikj, kikj, kikj, jhiy)
+
+scala> ab --=Array( "kikj","jhiy")
+res12: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj, kikj, kikj)
+
+scala> ab --= "kikj"
+<console>:17: error: type mismatch;
+ found   : String("kikj")
+ required: scala.collection.TraversableOnce[String]
+       ab --= "kikj"
+              ^
+
+scala> ab -= "kikj"
+res14: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj, kikj)
+
+scala> ab -= "kikj"
+res15: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio, kikj)
+
+scala> ab -= "kikj"
+res16: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(sdae, jhkio)
+
+scala> var a = Array("ALice")
+a: Array[String] = Array(ALice)
+
+scala> var b = Array("In")
+b: Array[String] = Array(In)
+
+scala> var c = Array("Wonder")
+c: Array[String] = Array(Wonder)
+
+scala> var d = Array("Land")
+d: Array[String] = Array(Land)
+
+scala> var e = Array.concat(a,b,c,d)
+e: Array[String] = Array(ALice, In, Wonder, Land)
+
+scala> var e = Array.concat("a b c d")
+<console>:15: error: type mismatch;
+ found   : String("a b c d")
+ required: Array[?]
+       var e = Array.concat("a b c d")
+                            ^
+
+scala> var e = Array.concat(a,b,c,d)
+e: Array[String] = Array(ALice, In, Wonder, Land)
+
+scala> var word = (a+" "b+" "c+" "d+" ")
+<console>:16: error: value b is not a member of String
+       var word = (a+" "b+" "c+" "d+" ")
+                        ^
+<console>:16: error: value unary_+ is not a member of String
+       var word = (a+" "b+" "c+" "d+" ")
+                         ^
+<console>:16: error: value unary_+ is not a member of String
+       var word = (a+" "b+" "c+" "d+" ")
+                              ^
+<console>:16: error: value unary_+ is not a member of String
+       var word = (a+" "b+" "c+" "d+" ")
+                                   ^
+
+scala> var word = (a+" "+b+" "+c+" "+d+)
+<console>:19: error: missing argument list for method + in class String
+Unapplied methods are only converted to functions when a function type is expected.
+You can make this conversion explicit by writing `$plus _` or `$plus(_)` instead of `$plus`.
+       var word = (a+" "+b+" "+c+" "+d+)
+                                      ^
+
+scala> var word = (a+" "+b+" "+c+" "+d)
+word: String = [Ljava.lang.String;@401f8e24 [Ljava.lang.String;@76657463 [Ljava.lang.String;@2e263107 [Ljava.lang.String;@40dd25b1
+
+scala> word
+res17: String = [Ljava.lang.String;@401f8e24 [Ljava.lang.String;@76657463 [Ljava.lang.String;@2e263107 [Ljava.lang.String;@40dd25b1
+
+scala> var a =("Alice In Wonderland")
+a: String = Alice In Wonderland
+
+scala> var a =Array("Alice In Wonderland")
+a: Array[String] = Array(Alice In Wonderland)
+
+scala> var a =("Alice In Wonderland")
+a: String = Alice In Wonderland
+
+scala> a = Array.toString()
+a: String = scala.Array$@1bef43f6
+
+scala> a
+res18: String = scala.Array$@1bef43f6
+
+scala> var a
+     | 
+     | a
+<console>:3: error: '=' expected but ';' found.
+a
+^
+
+scala>  var a = Array.toString()
+a: String = scala.Array$@1bef43f6
+
+scala> var a
+     |  var a = Array.toString()
+<console>:2: error: '=' expected but ';' found.
+ var a = Array.toString()
+^
+
+scala> var c =("Alice In  Wonderland")
+c: String = Alice In  Wonderland
+
+scala> d =[1,4,5,6;9,30,1,2]
+<console>:1: error: illegal start of simple expression
+d =[1,4,5,6;9,30,1,2]
+   ^
+<console>:1: error: ';' expected but ',' found.
+d =[1,4,5,6;9,30,1,2]
+             ^
+
+scala> var d = (1,2,3,5,6;7,8,9,1)
+<console>:1: error: ')' expected but ';' found.
+var d = (1,2,3,5,6;7,8,9,1)
+                  ^
+<console>:1: error: ';' expected but ',' found.
+var d = (1,2,3,5,6;7,8,9,1)
+                    ^
+
+scala> var d =(1;2;3;4;5;6,9;9;0)
+<console>:1: error: ')' expected but ';' found.
+var d =(1;2;3;4;5;6,9;9;0)
+         ^
+<console>:1: error: ';' expected but ',' found.
+var d =(1;2;3;4;5;6,9;9;0)
+                   ^
+<console>:1: error: ';' expected but ')' found.
+var d =(1;2;3;4;5;6,9;9;0)
+                         ^
+
+scala> var a =Array(1,2,3,4,5)
+a: Array[Int] = Array(1, 2, 3, 4, 5)
+
+scala> a.foreach(i => println(i)}
+<console>:1: error: ')' expected but '}' found.
+a.foreach(i => println(i)}
+                         ^
+
+scala> a.foreach{ i => println(i)}
+1
+2
+3
+4
+5
+
+scala> val matrix = Array(Array(1, 2, 3), Array(4, 5, 6), Array(7, 8, 9)).transpose
+matrix: Array[Array[Int]] = Array(Array(1, 4, 7), Array(2, 5, 8), Array(3, 6, 9))
+
+scala> val matrix = Array(Arrya(10,9,7), Array(2,3,4), Array(10,11,12)).transpose
+<console>:15: error: not found: value Arrya
+       val matrix = Array(Arrya(10,9,7), Array(2,3,4), Array(10,11,12)).transpose
+                          ^
+
+scala> val matrix = Array(Array(10,9,7), Array(2,3,4), Array(10,11,12)).transpose
+matrix: Array[Array[Int]] = Array(Array(10, 2, 10), Array(9, 3, 11), Array(7, 4, 12))
+
+scala> var b = Array(10,12,13)
+b: Array[Int] = Array(10, 12, 13)
+
+scala> var b = Array(15,12,43)
+b: Array[Int] = Array(15, 12, 43)
+
+scala> val common = arr1.intersect(arr2)
+<console>:15: error: not found: value arr1
+       val common = arr1.intersect(arr2)
+                    ^
+<console>:15: error: not found: value arr2
+       val common = arr1.intersect(arr2)
+                                   ^
+
+scala> 
+
+scala> println(common.mkString(", "))
+<console>:16: error: not found: value common
+       println(common.mkString(", "))
+               ^
+
+scala> val arr1 = Array(1, 2, 3, 4, 5)
+arr1: Array[Int] = Array(1, 2, 3, 4, 5)
+
+scala> val arr2 = Array(3, 4, 5, 6, 7)
+arr2: Array[Int] = Array(3, 4, 5, 6, 7)
+
+scala> 
+
+scala> val common = arr1.intersect(arr2)
+common: Array[Int] = Array(3, 4, 5)
+
+scala> 
+
+scala> println(common.mkString(", "))
+3, 4, 5
+
+scala> val b = Array(10,32, 83, 4, 15)
+b: Array[Int] = Array(10, 32, 83, 4, 15)
+
+scala> val u = Array(10,83, 3, 15, 25)
+u: Array[Int] = Array(10, 83, 3, 15, 25)
+
+scala> println(common.mkString(", "))
+3, 4, 5
+
+scala> val common = arr1.intersect(arr2)
+common: Array[Int] = Array(3, 4, 5)
+
+scala> val arr1 = Array(1, 2, 3, 4, 5)
+arr1: Array[Int] = Array(1, 2, 3, 4, 5)
+
+scala> val arr2 = Array(3, 4, 5, 6, 7)
+arr2: Array[Int] = Array(3, 4, 5, 6, 7)
+
+scala> 
+
+scala> val common = arr1.intersect(arr2)
+common: Array[Int] = Array(3, 4, 5)
+
+scala> 
+
+scala> println(common.mkString(", "))
+3, 4, 5
+
+scala> val b = Array(10,32, 83, 4, 15)
+b: Array[Int] = Array(10, 32, 83, 4, 15)
+
+scala> val u = Array(10,83, 3, 15, 25)
+u: Array[Int] = Array(10, 83, 3, 15, 25)
+
+scala> val common = b.intersect(u)
+common: Array[Int] = Array(10, 83, 15)
+
+scala> println(common.mkString(", "))
+10, 83, 15
+
+scala> println(common.String(", "))
+<console>:17: error: value String is not a member of Array[Int]
+       println(common.String(", "))
+                      ^
+
+scala> println(common.mkString(", "))
+10, 83, 15
+
+scala> 
+
