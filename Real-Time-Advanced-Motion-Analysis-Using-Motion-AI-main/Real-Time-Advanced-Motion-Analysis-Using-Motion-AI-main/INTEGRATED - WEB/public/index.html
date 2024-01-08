@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set the character set for the document -->
+    <meta charset="UTF-8">
+    <!-- Set the viewport to control the layout on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the title of the HTML document -->
+    <title>Mathematics of Intelligent Systems - End Semester Project</title>
+    <!-- Link to Bootstrap CSS stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Internal styling for the document -->
+    <style>
+        /* Styling for the body element */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Styling for the container class */
+        .container {
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 -4px 8px rgba(0, 0, 0, 0.1); /* Added top shadow */
+        }
+
+        /* Styling for the h1 element */
+        h1 {
+            font-size: 48px;
+            color: #333; /* Dark gray for text */
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the back-button class */
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove default link styling */
+        }
+
+        /* Styling for the back-button class on hover */
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Heading for the page -->
+        <h1>Mathematics of Intelligent Systems - End Semester Project</h1>
+        <!-- Link to navigate to index2.html with a back-button class -->
+        <a href="index2.html" class="back-button">DMD - VIDEO ANALYSIS &rarr;</a>
+    </div>
+
+    <!-- External script references for jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript to redirect to index.html when the button is clicked
+        document.querySelector('.back-button').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

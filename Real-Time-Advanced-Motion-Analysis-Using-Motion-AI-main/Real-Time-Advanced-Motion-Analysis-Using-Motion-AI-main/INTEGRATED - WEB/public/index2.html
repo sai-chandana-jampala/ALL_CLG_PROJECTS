@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Set the character set for the document -->
+    <meta charset="UTF-8">
+    <!-- Set the viewport to control the layout on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the title of the HTML document -->
+    <title>DMD Application Selector</title>
+
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+    <!-- Main content container -->
+    <div class="container mt-5">
+        <!-- Jumbotron for the welcome message and application selection -->
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Welcome to the DMD Application Selector</h1>
+            <p class="lead">Please choose the type of DMD application you want to perform:</p>
+
+            <!-- Form for selecting DMD application type -->
+            <form id="applicationForm">
+                <!-- Radio button for Motion Analysis -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="applicationType" id="motionAnalysis" value="motionAnalysis">
+                    <label class="form-check-label" for="motionAnalysis">
+                        Motion Analysis in Video
+                    </label>
+                </div>
+
+                <!-- Radio button for Video Compression -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="applicationType" id="videoCompression" value="videoCompression">
+                    <label class="form-check-label" for="videoCompression">
+                        Video Compression
+                    </label>
+                </div>
+
+                <!-- Radio button for Foreground Subtraction -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="applicationType" id="foregroundSubtraction" value="foregroundSubtraction">
+                    <label class="form-check-label" for="foregroundSubtraction">
+                        Foreground Subtraction
+                    </label>
+                </div>
+
+                <!-- Submit button to trigger the form submission -->
+                <button type="button" class="btn btn-primary mt-3" onclick="submitForm()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS, Popper.js, and jQuery from CDNs -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript function to handle form submission and redirect based on the selected application
+        function submitForm() {
+            const applicationType = document.querySelector('input[name="applicationType"]:checked');
+            if (applicationType) {
+                const selectedValue = applicationType.value;
+                if (selectedValue === "motionAnalysis") {
+                    window.location.href = 'index3.html';
+                } else if (selectedValue === "videoCompression") {
+                    window.location.href = 'index33.html';
+                } else if (selectedValue === "foregroundSubtraction") {
+                    window.location.href = 'index333.html';
+                }
+            } else {
+                // Alert the user if no application type is selected
+                alert('Please select an application type before submitting.');
+            }
+        }
+    </script>
+</body>
+
+</html>
