@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Encryption Successful!</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.3em;
+      font-weight: 400;
+      margin-bottom: 25px;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .download-link {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #4caf50; /* Match the color of buttons */
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-link:hover {
+      background-color: #45a049;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    .button, .arrow {
+      background-color: #4caf50;
+      color: #fff;
+      margin-bottom: 10px; /* Add space between buttons */
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .button:hover, .arrow:hover {
+      background-color: #45a049;
+    }
+
+    .arrow::before {
+      content: "→";
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Encryption Successful!</h1>
+  <p>Congratulations! Your image has been successfully encrypted. Click the button below to download the encrypted image.</p>
+
+  <!-- Use the relative path for the download link -->
+  <a href="/download-encrypted/encrypted_image.jpg" download="encrypted_image.jpg" class="download-link">Download Encrypted Image</a>
+
+  <p>Remember to keep your password safe and secure. You will need it to decrypt the image later.</p>
+
+  <!-- Show buttons separately and adjust styles -->
+  <div class="button-container">
+    <a href="dashboard.html" class="button">Do you wanna select the application <span class="arrow"></span></a>
+    <a href="image-en-dec.html" class="button">Perform the decryption <span class="arrow"></span></a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!-- decryption-entry.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decryption Password Entry</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <form id="decryptionEntryForm">
+    <h1>Decryption Password Entry</h1>
+    <label for="decryptionPassword">Enter the decryption password</label>
+    <input type="password" id="decryptionPassword" name="decryptionPassword" required>
+    <button type="button" onclick="submitPassword()">Submit Password</button>
+  </form>
+
+  <script>
+    function submitPassword() {
+      const passwordInput = document.getElementById('decryptionPassword');
+      const password = passwordInput.value;
+
+      if (password === 'sai') {
+        alert('Password matched successfully. Decryption in progress!');
+        // Redirect or perform additional actions
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>

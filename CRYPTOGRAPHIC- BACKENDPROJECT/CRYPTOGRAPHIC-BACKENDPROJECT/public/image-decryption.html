@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Decryption</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <form id="decryptionForm">
+    <h1>Image Decryption</h1>
+    <label for="imagePassword">Enter the same Password which you gave for the encryption</label>
+    <input type="password" id="imagePassword" name="imagePassword" required>
+    <label for="imageToUpload">Choose an image to Decrypt</label>
+    <input type="file" id="imageToUpload" name="image" accept="image/*" required>
+    <button type="button" onclick="decryptImage()">Decrypt Image</button>
+  </form>
+
+  <script>
+    function decryptImage() {
+      const password = document.getElementById('imagePassword').value;
+      const imageInput = document.getElementById('imageToUpload');
+      const image = imageInput.files[0];
+
+      const formData = new FormData();
+      formData.append('imagePassword', password);  // Corrected key
+      formData.append('imageToDecrypt', image);    // Corrected key
+
+      fetch('/decrypt-image', {  // Corrected route
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Image Decryption successful!');
+          // Redirect to download-image-decryption.html
+          console.log('Decryption successful!');
+          window.location.replace('/download-image-decryption.html');
+        } else {
+          alert('Image decryption failed!');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>

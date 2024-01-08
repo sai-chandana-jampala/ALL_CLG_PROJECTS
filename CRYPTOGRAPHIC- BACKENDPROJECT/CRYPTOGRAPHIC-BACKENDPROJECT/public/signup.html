@@ -1,0 +1,100 @@
+<!-- public/signup.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptography Semester Project - Sign Up</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #signup-container {
+      max-width: 400px;
+      width: 100%;
+      margin: 20px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #333;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 1.2em;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .question-mark {
+      font-size: 1.5em;
+      color: #555;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sign-up Form -->
+  <div id="signup-container">
+    <h3>New User Sign Up ?</h3>
+    <form action="/signup" method="post" onsubmit="showAlertAndRedirect(event)">
+      <label for="signupName">Name:</label>
+      <input type="text" id="signupName" name="name" required>
+      <br>
+      <label for="signupUsername">Username (Gmail address):</label>
+      <input type="text" id="signupUsername" name="username" required>
+      <br>
+      <label for="signupPassword">Password:</label>
+      <input type="password" id="signupPassword" name="password" required>
+      <br>
+      <label for="signupPhone">Phone number (10 digits):</label>
+      <input type="tel" id="signupPhone" name="phone" pattern="[0-9]{10}" required>
+      <br>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+
+ 
+  
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Encryption/Decryption Options - Crypto End Semester Project</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose Image Encryption/Decryption Operation</h1>
+
+  <div class="button-container">
+    <button onclick="handleImageEncryption()">Image Encryption</button>
+    <button onclick="handleImageDecryption()">Image Decryption</button>
+  </div>
+
+  <script>
+    function handleImageEncryption() {
+      window.location.href = '/image-encryption.html';
+    }
+    
+    function handleImageDecryption() {
+      window.location.href = '/image-decryption.html';
+    }
+  </script>
+</body>
+</html>
